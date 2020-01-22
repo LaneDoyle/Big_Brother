@@ -53,7 +53,34 @@ def edit_existing():
     else: 
         print("\n*** THAT NUMBER DOES NOT EXIST! ***\n")
         
-
+def delete_person():
+    ssn = input("What is the SSN you would like to remove? ")
+    if ssn in people:
+        entry = people.pop(ssn)
+        print(ssn, ":", entry[0], entry[1]+", has been deleted!\n")
+    else: 
+        print("\n*** THAT NUMBER DOES NOT EXIST! ***\n")    
+        
+def lookup_by_name():
+    tally = 0
+    last_name = input("What is the last name of the person you wish to lookup? ")
+    for key in people.keys():
+        entry = people[key]
+        if last_name == entry[1]:
+            tally += 1
+            #TODO: turn this algorithm into a function to eliminate duplicate code.
+            print()
+            print("SSN: ", key)
+            print("Name: ", people[key][1]+", "+people[key][0])
+            print("Birth Year: ", people[key][2])
+            print("**********************")  
+    
+    print(tally, "matches were found!\n")
+    
+        
+         
+    
+    
 def quit():
     #print("Running quit()")
     pickle_file = open("datafile.pickle", "wb")
@@ -98,7 +125,11 @@ while keep_going:
     elif choice == "4":
         print_all(sort_it = True)  
     elif choice == "5":
-        edit_existing()         
+        edit_existing()   
+    elif choice == "6":
+        delete_person()  
+    elif choice == "7":
+        lookup_by_name()     
     elif choice == "Q" or choice == "q":
         quit()
         keep_going = False
